@@ -17,8 +17,8 @@ namespace Topshelf.Nancy.Sample
                     s.WhenStopped(service => service.Stop());
                     s.WithNancyEndpoint(x, c =>
                     {
-                        c.AddHost(port: 20005);
-                        c.AddHost(port: 20006);
+                        c.AddHost(port: 8080);
+                        c.AddHost(port: 8081);
                         c.CreateUrlReservationsOnInstall();
                         c.OpenFirewallPortsOnInstall(firewallRuleName: "topshelf.nancy.sampleservice");
                     });

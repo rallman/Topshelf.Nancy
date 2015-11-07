@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Nancy.Sample", "Topshelf.Nancy.Sample\Topshelf.Nancy.Sample.csproj", "{E5A00FB0-54E3-4E77-9317-BCC748092DE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Nancy", "Topshelf.Nancy\Topshelf.Nancy.csproj", "{615DD185-84CB-44C5-BF97-9C61E39DED34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Owin.Sample", "Topshelf.Owin.Sample\Topshelf.Owin.Sample.csproj", "{991F27FD-55D9-47D4-9140-777F9D7825EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Owin", "Topshelf.Owin\Topshelf.Owin.csproj", "{E410413E-F4DF-4720-84FC-6D49C9E5EE2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{615DD185-84CB-44C5-BF97-9C61E39DED34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{615DD185-84CB-44C5-BF97-9C61E39DED34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{615DD185-84CB-44C5-BF97-9C61E39DED34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991F27FD-55D9-47D4-9140-777F9D7825EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991F27FD-55D9-47D4-9140-777F9D7825EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991F27FD-55D9-47D4-9140-777F9D7825EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991F27FD-55D9-47D4-9140-777F9D7825EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E410413E-F4DF-4720-84FC-6D49C9E5EE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E410413E-F4DF-4720-84FC-6D49C9E5EE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E410413E-F4DF-4720-84FC-6D49C9E5EE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E410413E-F4DF-4720-84FC-6D49C9E5EE2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
