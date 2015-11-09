@@ -1,4 +1,7 @@
-﻿namespace Topshelf.Nancy
+﻿/*
+Copied from justeat/Topshelf.Nancy
+*/
+namespace Topshelf.Owin
 {
     public class NetShResult
     {

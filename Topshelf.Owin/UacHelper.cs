@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
+﻿/*
+Copied from justeat/Topshelf.Nancy
+*/
+using System.Diagnostics;
 
-namespace Topshelf.Nancy
+namespace Topshelf.Owin
 {
     public static class UacHelper
     {

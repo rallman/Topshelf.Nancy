@@ -1,0 +1,23 @@
+<html>
+<body>
+<h2>Server time:</h2>
+<div id="clockDisplay">waiting...</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+<script src="/signalr/hubs"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $.extend($.connection.clockHub.client, {
+            tick: function (data) {
+                console.log(data);
+                $('#clockDisplay').text(data);
+            }
+        });
+
+        $.connection.hub.start();
+    });
+</script>
+</body>
+</html>

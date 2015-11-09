@@ -1,6 +1,9 @@
-﻿using System;
+﻿/*
+Copied from justeat/Topshelf.Nancy
+*/
+using System;
 
-namespace Topshelf.Nancy
+namespace Topshelf.Owin
 {
     public static class NetSh
     {

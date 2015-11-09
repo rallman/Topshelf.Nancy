@@ -2,29 +2,30 @@
 using Topshelf.ServiceConfigurators;
 using Topshelf.HostConfigurators;
 
-namespace Topshelf.Nancy
+namespace Topshelf.Owin
 {
-    public static class OwinServiceConfiguratorExtensions
+   public static class OwinServiceConfiguratorExtensions
    {
-        public static ServiceConfigurator<T> WithOwinEndpoint<T>(this ServiceConfigurator<T> configurator, HostConfigurator hostconfigurator, Action<OwinServiceConfiguration> owinConfigurator) where T : class
-        {
-            var nancyServiceConfiguration = new OwinServiceConfiguration();
+      public static ServiceConfigurator<T> WithOwinEndpoint<T>(this ServiceConfigurator<T> configurator,
+         HostConfigurator hostconfigurator, Action<OwinServiceConfiguration> owinConfigurator) where T : class
+      {
+         var owinServiceConfiguration = new OwinServiceConfiguration();
 
-            owinConfigurator(nancyServiceConfiguration);
+         owinConfigurator(owinServiceConfiguration);
 
-            var nancyService = new OwinService();
+         var owinService = new OwinService();
 
-            nancyService.Configure(nancyServiceConfiguration);
+         owinService.Configure(owinServiceConfiguration);
 
-            configurator.AfterStartingService(t => nancyService.Start());
+         configurator.AfterStartingService(t => owinService.Start());
 
-            configurator.BeforeStoppingService(t => nancyService.Stop());
+         configurator.BeforeStoppingService(t => owinService.Stop());
 
-            hostconfigurator.BeforeInstall(x => nancyService.BeforeInstall());
+         hostconfigurator.BeforeInstall(x => owinService.BeforeInstall());
 
-            hostconfigurator.BeforeUninstall(nancyService.BeforeUninstall);
+         hostconfigurator.BeforeUninstall(owinService.BeforeUninstall);
 
-            return configurator;
-        }
-    }
+         return configurator;
+      }
+   }
 }

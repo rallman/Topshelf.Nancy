@@ -1,3 +1,6 @@
+/*
+Copied from justeat/Topshelf.Nancy
+*/
 //using System;
 //using System.Collections.Generic;
 //using System.Security.Principal;

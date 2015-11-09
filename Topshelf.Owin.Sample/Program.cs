@@ -1,5 +1,4 @@
 ﻿using Microsoft.Owin.Hosting;
-using Topshelf.Nancy;
 using Topshelf.Owin;
 
 namespace Topshelf.Owin.Sample
@@ -8,7 +7,6 @@ namespace Topshelf.Owin.Sample
     {
         static void Main()
         {
-           //var webApp = WebApp.Start<Startup>("http://+:8080");
             var host = HostFactory.New(x =>
             {
                 x.UseNLog();
@@ -25,8 +23,6 @@ namespace Topshelf.Owin.Sample
                        
                        //c.WithStartup<Startup>();
                        //c.Url("http://+:8080");
-                       //c.AddHost(port: 8080);
-                       //c.AddHost(port: 8081);
                        //c.CreateUrlReservationsOnInstall();
                        //c.OpenFirewallPortsOnInstall(firewallRuleName: "topshelf.owin.sampleservice");
                     });

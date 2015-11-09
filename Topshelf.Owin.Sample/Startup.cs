@@ -6,6 +6,7 @@ namespace Topshelf.Owin.Sample
    {
       public void Configuration(IAppBuilder app)
       {
+         app.MapSignalR();
          app.UseNancy();
       }
    }

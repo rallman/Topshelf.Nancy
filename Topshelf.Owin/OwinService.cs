@@ -1,90 +1,80 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Owin.Hosting;
-using Nancy;
-//using Nancy.Hosting.Self;
 using Topshelf.Logging;
 
-namespace Topshelf.Nancy
+namespace Topshelf.Owin
 {
-    internal class OwinService
+   internal class OwinService
    {
-        //private NancyHost NancyHost { get; set; }
+      //todo:wire in reservations and firewall rules
+      //private NancyHost NancyHost { get; set; }
+      //private HostConfiguration NancyHostConfiguration { get; set; }
 
-        //private HostConfiguration NancyHostConfiguration { get; set; }
+      private OwinServiceConfiguration OwinConfiguration { get; set; }
+      private IDisposable webApp;
 
-        private OwinServiceConfiguration OwinConfiguration { get; set; }
-       private IDisposable webApp;
+      private static readonly LogWriter Logger = HostLogger.Get(typeof (OwinService));
+      //private UrlReservationsHelper _urlReservationsHelper;
 
-        private static readonly LogWriter Logger = HostLogger.Get(typeof(OwinService));
-        //private UrlReservationsHelper _urlReservationsHelper;
+      public void Configure(OwinServiceConfiguration nancyServiceConfiguration)
+      {
+         OwinConfiguration = nancyServiceConfiguration;
+      }
+      //public NancyHost Configure(OwinServiceConfiguration nancyServiceConfiguration)
+      //{
+      //    var nancyHostConfiguration = new HostConfiguration();
+      //    if (nancyServiceConfiguration.NancyHostConfigurator != null)
+      //    {
+      //        nancyServiceConfiguration.NancyHostConfigurator(nancyHostConfiguration);
+      //    }
+      //    NancyServiceConfiguration = nancyServiceConfiguration;
+      //    NancyHostConfiguration = nancyHostConfiguration;
+      //    _urlReservationsHelper = new UrlReservationsHelper(NancyServiceConfiguration.Uris, NancyHostConfiguration);
+      //    if (NancyServiceConfiguration.Bootstrapper != null) {
+      //        NancyHost = new NancyHost(NancyServiceConfiguration.Bootstrapper, NancyHostConfiguration, NancyServiceConfiguration.Uris.ToArray());
+      //    } else {
+      //        NancyHost = new NancyHost(NancyHostConfiguration, NancyServiceConfiguration.Uris.ToArray());
+      //    }
+      //    return NancyHost;
+      //}
 
-        //public NancyHost Configure(OwinServiceConfiguration nancyServiceConfiguration)
-        //{
+      public void Start()
+      {
+         //todo:use configuration for url(s?)
+         //todo:figure out how to specify the "Startup" in WebApp.Start<Startup>(url)
+         Logger.Info("[Topshelf.Owin] Starting OWIN");
+         var url = "http://+:8080"; //OwinConfiguration.Uris.First().ToString();
+         webApp = WebApp.Start(url);
+         Logger.Info("[Topshelf.Owin] OWIN started");
+      }
 
-        //    var nancyHostConfiguration = new HostConfiguration();
+      public void Stop()
+      {
+         Logger.Info("[Topshelf.Owin] Stopping OWIN");
+         webApp?.Dispose();
+         Logger.Info("[Topshelf.Owin] OWIN stopped");
+      }
 
-        //    if (nancyServiceConfiguration.NancyHostConfigurator != null)
-        //    {
-        //        nancyServiceConfiguration.NancyHostConfigurator(nancyHostConfiguration);
-        //    }
+      public void BeforeInstall()
+      {
+         //    if (NancyServiceConfiguration.ShouldCreateUrlReservationsOnInstall)
+         //    {
+         //        _urlReservationsHelper.TryDeleteUrlReservations();
+         //        if (NancyServiceConfiguration.ShouldOpenFirewallPorts)
+         //        {
+         //            var ports = NancyServiceConfiguration.Uris.Select(x => x.Port).ToList();
+         //            _urlReservationsHelper.OpenFirewallPorts(ports, NancyServiceConfiguration.FirewallRuleName);
+         //        }
+         //        _urlReservationsHelper.AddUrlReservations();
+         //    }
+      }
 
-        //    NancyServiceConfiguration = nancyServiceConfiguration;
-        //    NancyHostConfiguration = nancyHostConfiguration;
-
-        //    _urlReservationsHelper = new UrlReservationsHelper(NancyServiceConfiguration.Uris, NancyHostConfiguration);
-
-        //    if (NancyServiceConfiguration.Bootstrapper != null) {
-        //        NancyHost = new NancyHost(NancyServiceConfiguration.Bootstrapper, NancyHostConfiguration, NancyServiceConfiguration.Uris.ToArray());
-        //    } else {
-        //        NancyHost = new NancyHost(NancyHostConfiguration, NancyServiceConfiguration.Uris.ToArray());
-        //    }
-
-        //    return NancyHost;
-        //}
-
-        public void Start()
-        {
-            Logger.Info("[Topshelf.Nancy] Starting NancyHost");
-           var url = "http://+:8080"; //OwinConfiguration.Uris.First().ToString();
-           webApp = WebApp.Start(url);
-        //    NancyHost.Start();
-            Logger.Info("[Topshelf.Nancy] NancyHost started");
-        }
-
-        public void Stop()
-        {
-            Logger.Info("[Topshelf.Nancy] Stopping NancyHost");
-        //    NancyHost.Stop();
-           webApp?.Dispose();
-           Logger.Info("[Topshelf.Nancy] NancyHost stopped");
-        }
-
-        public void BeforeInstall()
-        {
-        //    if (NancyServiceConfiguration.ShouldCreateUrlReservationsOnInstall)
-        //    {
-        //        _urlReservationsHelper.TryDeleteUrlReservations();
-        //        if (NancyServiceConfiguration.ShouldOpenFirewallPorts)
-        //        {
-        //            var ports = NancyServiceConfiguration.Uris.Select(x => x.Port).ToList();
-        //            _urlReservationsHelper.OpenFirewallPorts(ports, NancyServiceConfiguration.FirewallRuleName);
-        //        }
-        //        _urlReservationsHelper.AddUrlReservations();
-        //    }
-        }
-
-        public void BeforeUninstall()
-        {
-        //    if (NancyServiceConfiguration.ShouldDeleteReservationsOnUnInstall)
-        //    {
-        //        _urlReservationsHelper.TryDeleteUrlReservations();
-        //    }
-        }
-
-       public void Configure(OwinServiceConfiguration nancyServiceConfiguration)
-       {
-          OwinConfiguration = nancyServiceConfiguration;
-       }
+      public void BeforeUninstall()
+      {
+         //    if (NancyServiceConfiguration.ShouldDeleteReservationsOnUnInstall)
+         //    {
+         //        _urlReservationsHelper.TryDeleteUrlReservations();
+         //    }
+      }
    }
 }
